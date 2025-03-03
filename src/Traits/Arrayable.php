@@ -13,6 +13,11 @@ trait Arrayable
         $props = (new \ReflectionClass(static::class))->getProperties();
 
         foreach ($props as $prop) {
+
+            if (count($prop->getAttributes(Property::class)) === 0) {
+                continue;
+            }
+
             $attributes = $prop->getAttributes(Property::class);
             if ($attributes[0]->isRepeated()) {
                 //TODO: Change for custom exception

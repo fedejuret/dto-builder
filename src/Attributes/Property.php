@@ -2,18 +2,16 @@
 
 namespace Fedejuret\DtoBuilder\Attributes;
 
-#[\Attribute]
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
 class Property
 {
     /**
      * @param string|null $name
-     * @param bool $required
      * @param string|null $setter
      * @param string|null $getter
      */
     public function __construct(
         private ?string $name = null,
-        private bool $required = false,
         private ?string $setter = null,
         private ?string $getter = null,
     ) {}
@@ -50,17 +48,5 @@ class Property
         $this->name = $name;
         return $this;
     }
-
-    public function isRequired(): bool
-    {
-        return $this->required;
-    }
-
-    public function setRequired(bool $required): Property
-    {
-        $this->required = $required;
-        return $this;
-    }
-
 
 }

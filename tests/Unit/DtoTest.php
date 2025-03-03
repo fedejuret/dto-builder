@@ -9,7 +9,10 @@ describe('1.0: Can create user Dto', function () {
         $dto = (new CreateUserDto())
             ->loadFromArray([
                 'first_name' => 'Federico',
-                'last_name' => 'Juretich'
+                'last_name' => 'Juretich',
+                'birthday' => '2001-09-09',
+                'email' => 'hola@federicojuretich.com',
+                'email_sent' => false,
             ]);
 
         expect($dto instanceof CreateUserDto);
@@ -17,7 +20,10 @@ describe('1.0: Can create user Dto', function () {
             ->and($dto->getLastName())->toBe('Juretich')
             ->and($dto->toArray())->toBe([
                 'first_name' => 'Federico',
-                'last_name' => 'Juretich'
+                'last_name' => 'Juretich',
+                'birthday' => '2001-09-09',
+                'email' => 'hola@federicojuretich.com',
+                'email_sent' => false,
             ]);
     });
 
@@ -26,6 +32,6 @@ describe('1.0: Can create user Dto', function () {
             ->loadFromArray([
                 'first_name' => 'Federico',
             ]);
-    })->throws(Exception::class);
+    })->throws(\Fedejuret\DtoBuilder\Exceptions\ValidationException::class);
 
 });
