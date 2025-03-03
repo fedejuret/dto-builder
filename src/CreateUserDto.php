@@ -4,6 +4,7 @@ namespace Fedejuret\DtoBuilder;
 
 
 use Fedejuret\DtoBuilder\Attributes\Property;
+use Fedejuret\DtoBuilder\Attributes\Validations\Required;
 use Fedejuret\DtoBuilder\Traits\Loadable;
 use Fedejuret\DtoBuilder\Traits\Arrayable;
 
@@ -11,10 +12,11 @@ class CreateUserDto
 {
     use Arrayable, Loadable;
 
-    #[Property(name: 'first_name', required: true)]
+    #[Property(name: 'first_name')]
     private string $firstName;
 
-    #[Property(name: 'last_name', required: true)]
+    #[Property(name: 'last_name')]
+    #[Required]
     private string $lastName;
 
     public function getFirstName(): string

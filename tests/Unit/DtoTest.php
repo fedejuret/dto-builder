@@ -26,6 +26,6 @@ describe('1.0: Can create user Dto', function () {
             ->loadFromArray([
                 'first_name' => 'Federico',
             ]);
-    })->throws(Exception::class);
+    })->throws(\Fedejuret\DtoBuilder\Exceptions\ValidationException::class);
 
 });

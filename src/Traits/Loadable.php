@@ -6,14 +6,23 @@ use Fedejuret\DtoBuilder\Attributes\Property;
 
 trait Loadable
 {
-    use PropertyTrait;
+    use PropertyTrait, ValidationsTrait;
 
+    /**
+     * @throws \ReflectionException
+     */
     public function loadFromArray(array $array): self {
 
         $props = (new \ReflectionClass(static::class))->getProperties();
 
         foreach ($props as $prop) {
+
             $attributes = $prop->getAttributes(Property::class);
+
+            if (count($attributes) === 0) {
+                continue;
+            }
+
             if ($attributes[0]->isRepeated()) {
                 //TODO: Change for custom exception
                 throw new \Exception('Tributes repeated');
@@ -25,9 +34,7 @@ trait Loadable
 
                 $value = $array[$indexName] ?? null;
 
-                if ($value === null && $this->isRequired($property)) {
-                    throw new \Exception(sprintf('[%s] is required', $indexName));
-                }
+                $this->validate($prop, $value);
 
                 $setter = $this->getSetter($prop, $property);
                 if (method_exists($this, $setter)) {

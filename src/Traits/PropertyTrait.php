@@ -22,15 +22,6 @@ trait PropertyTrait
         return $classProperty->getName();
     }
 
-    /**
-     * @param Property $property
-     * @return bool
-     */
-    protected function isRequired(Property $property): bool
-    {
-        return $property->isRequired();
-    }
-
     protected function getGetter(\ReflectionProperty $classProperty, Property $property): string {
         if ($property->getGetter() !== null) {
             return $property->getGetter();
