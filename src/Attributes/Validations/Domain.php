@@ -7,7 +7,7 @@ use Fedejuret\DtoBuilder\Interfaces\ValidationInterface;
 use ReflectionProperty;
 
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-class Text implements ValidationInterface
+class Domain implements ValidationInterface
 {
 
     public function __construct(
@@ -24,10 +24,10 @@ class Text implements ValidationInterface
     public function validate(ReflectionProperty $property, mixed $value): void
     {
 
-        if (gettype($value) !== 'string') {
+        if (gettype($value) !== 'string' && filter_var($value, FILTER_VALIDATE_DOMAIN) === false) {
 
             if ($this->failMessage === null) {
-                $this->failMessage = sprintf('"%s" must be string', $property->getName());
+                $this->failMessage = sprintf('"%s" must be a valid domain', $property->getName());
             }
 
             throw new ValidationException($this->failMessage);

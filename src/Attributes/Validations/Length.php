@@ -30,7 +30,7 @@ class Length implements ValidationInterface
 
             if (strlen($value) < $this->min || strlen($value) > $this->max) {
                 if ($this->failMessage === null) {
-                    $this->failMessage = sprintf('Length for %s must between %s and %s', $property->getName(), $this->min, $this->max);
+                    $this->failMessage = sprintf('Length for "%s" must between %s and %s', $property->getName(), $this->min, $this->max);
                 }
 
                 throw new ValidationException($this->failMessage);
