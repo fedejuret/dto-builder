@@ -154,7 +154,6 @@ Este trait es quien habilita el método `loadFromArray($array)` en el dto. En es
 ## Property Attribute #[Property]
 Este atributo sirve para configurar la propiedad del dto.
 * name: setea el nombre con el que la propiedad será devuelta en el método toArray y tambien cómo será buscadá dentro del array en el método loadFromArray.
-* required: si la propiedad es requerida. Al ejecutar loadFromArray si la propiedad no está dentro del array, entonces se lanza una excepción.
 * setter: especifica el nombre del método setter que se quiere usar.
 * getter: especifica el nombre del getter que se quiere usar.
 
