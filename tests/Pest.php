@@ -24,6 +24,17 @@
 |
 */
 
+use Fedejuret\DtoBuilder\Attributes\Property;
+use Fedejuret\DtoBuilder\Attributes\Validations\Boolean;
+use Fedejuret\DtoBuilder\Attributes\Validations\Date;
+use Fedejuret\DtoBuilder\Attributes\Validations\Email;
+use Fedejuret\DtoBuilder\Attributes\Validations\Length;
+use Fedejuret\DtoBuilder\Attributes\Validations\Required;
+use Fedejuret\DtoBuilder\Attributes\Validations\Text;
+use Fedejuret\DtoBuilder\CreateUserDto;
+use Fedejuret\DtoBuilder\Traits\Arrayable;
+use Fedejuret\DtoBuilder\Traits\Loadable;
+
 expect()->extend('toBeOne', function () {
     return $this->toBe(1);
 });
@@ -39,7 +50,173 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function getDtoClass(): object
 {
-    // ..
+    return new class {
+        use Arrayable, Loadable;
+
+        #[Property(name: 'first_name')]
+        #[Length(min: 4, max: 255)]
+        private string $firstName;
+
+        #[Property(name: 'last_name')]
+        #[Text]
+        #[Length(min: 8, max: 255)]
+        private string $lastName;
+
+        #[Property]
+        #[Date]
+        private string $birthday;
+
+        #[Property]
+        #[Required]
+        #[Email]
+        private string $email;
+
+        #[Property(name: 'email_sent')]
+        #[Required]
+        #[Boolean]
+        private bool $emailSent;
+
+        public function getEmailSent(): bool
+        {
+            return $this->emailSent;
+        }
+
+        public function setEmailSent(bool $emailSent)
+        {
+            $this->emailSent = $emailSent;
+            return $this;
+        }
+
+        public function getEmail(): string
+        {
+            return $this->email;
+        }
+
+        public function setEmail(string $email)
+        {
+            $this->email = $email;
+            return $this;
+        }
+
+        public function getBirthday(): string
+        {
+            return $this->birthday;
+        }
+
+        public function setBirthday(string $birthday)
+        {
+            $this->birthday = $birthday;
+            return $this;
+        }
+
+        public function getFirstName(): string
+        {
+            return $this->firstName;
+        }
+
+        public function setFirstName(string $firstName)
+        {
+            $this->firstName = $firstName;
+            return $this;
+        }
+
+        public function getLastName(): string
+        {
+            return $this->lastName;
+        }
+
+        public function setLastName(string $lastName)
+        {
+            $this->lastName = $lastName;
+            return $this;
+        }
+    };
+}
+
+function getDtoRepeatedPropertyAttributeClass(): object
+{
+    return new class {
+        use Arrayable, Loadable;
+
+        #[Property(name: 'first_name')]
+        #[Property]
+        #[Length(min: 4, max: 255)]
+        private string $firstName;
+
+        #[Property(name: 'last_name')]
+        #[Text]
+        #[Length(min: 8, max: 255)]
+        private string $lastName;
+
+        #[Property]
+        #[Date]
+        private string $birthday;
+
+        #[Property]
+        #[Required]
+        #[Email]
+        private string $email;
+
+        #[Property(name: 'email_sent')]
+        #[Required]
+        #[Boolean]
+        private bool $emailSent;
+
+        public function getEmailSent(): bool
+        {
+            return $this->emailSent;
+        }
+
+        public function setEmailSent(bool $emailSent)
+        {
+            $this->emailSent = $emailSent;
+            return $this;
+        }
+
+        public function getEmail(): string
+        {
+            return $this->email;
+        }
+
+        public function setEmail(string $email)
+        {
+            $this->email = $email;
+            return $this;
+        }
+
+        public function getBirthday(): string
+        {
+            return $this->birthday;
+        }
+
+        public function setBirthday(string $birthday)
+        {
+            $this->birthday = $birthday;
+            return $this;
+        }
+
+        public function getFirstName(): string
+        {
+            return $this->firstName;
+        }
+
+        public function setFirstName(string $firstName)
+        {
+            $this->firstName = $firstName;
+            return $this;
+        }
+
+        public function getLastName(): string
+        {
+            return $this->lastName;
+        }
+
+        public function setLastName(string $lastName)
+        {
+            $this->lastName = $lastName;
+            return $this;
+        }
+    };
 }

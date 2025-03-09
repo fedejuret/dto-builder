@@ -18,8 +18,8 @@ class Boolean implements ValidationInterface
     /**
      * @param ReflectionProperty $property
      * @param mixed $value
-     * @return void
      * @throws ValidationException
+     * @return void
      */
     public function validate(ReflectionProperty $property, mixed $value): void
     {
@@ -30,7 +30,7 @@ class Boolean implements ValidationInterface
                 $this->failMessage = sprintf('"%s" must be boolean', $property->getName());
             }
 
-            throw new ValidationException($this->failMessage);
+            throw new ValidationException($this->failMessage, $property->getName(), self::class);
         }
     }
 }

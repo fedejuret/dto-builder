@@ -3,6 +3,7 @@
 namespace Fedejuret\DtoBuilder\Traits;
 
 use Fedejuret\DtoBuilder\Interfaces\ValidationInterface;
+use ReflectionException;
 use ReflectionProperty;
 
 trait ValidationsTrait
@@ -12,7 +13,7 @@ trait ValidationsTrait
      * @param ReflectionProperty $property
      * @param mixed $value
      * @return void
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     protected function validate(ReflectionProperty $property, mixed $value) : void {
 

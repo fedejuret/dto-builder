@@ -3,10 +3,15 @@
 namespace Fedejuret\DtoBuilder\Traits;
 
 use Fedejuret\DtoBuilder\Attributes\Property;
+use Fedejuret\DtoBuilder\Exceptions\RepeatedAttributeException;
 
 trait Arrayable
 {
 
+    /**
+     * @return array
+     * @throws RepeatedAttributeException
+     */
     public function toArray(): array {
         $array = [];
 
@@ -20,8 +25,7 @@ trait Arrayable
 
             $attributes = $prop->getAttributes(Property::class);
             if ($attributes[0]->isRepeated()) {
-                //TODO: Change for custom exception
-                throw new \Exception('Tributes repeated');
+                throw new RepeatedAttributeException(sprintf('attribute %s was repeated in property %s', Property::class, $prop->getName()));
             }
 
             foreach ($attributes as $attribute) {

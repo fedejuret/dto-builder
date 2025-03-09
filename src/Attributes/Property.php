@@ -3,7 +3,7 @@
 namespace Fedejuret\DtoBuilder\Attributes;
 
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-class Property
+final readonly class Property
 {
     /**
      * @param string|null $name
@@ -21,21 +21,9 @@ class Property
         return $this->getter;
     }
 
-    public function setGetter(?string $getter): Property
-    {
-        $this->getter = $getter;
-        return $this;
-    }
-
     public function getSetter(): ?string
     {
         return $this->setter;
-    }
-
-    public function setSetter(?string $setter): Property
-    {
-        $this->setter = $setter;
-        return $this;
     }
 
     public function getName(): ?string
@@ -43,10 +31,5 @@ class Property
         return $this->name;
     }
 
-    public function setName(?string $name): Property
-    {
-        $this->name = $name;
-        return $this;
-    }
 
 }
