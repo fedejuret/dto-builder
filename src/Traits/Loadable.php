@@ -1,56 +1,61 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fedejuret\DtoBuilder\Traits;
 
 use Fedejuret\DtoBuilder\Attributes\Property;
 use Fedejuret\DtoBuilder\CreateUserDto;
 use Fedejuret\DtoBuilder\Exceptions\RepeatedAttributeException;
+use ReflectionClass;
 use ReflectionException;
 
 trait Loadable
 {
-    use PropertyTrait, ValidationsTrait;
+	use PropertyTrait, ValidationsTrait;
 
-    /**
-     * @param array $array
-     * @return CreateUserDto|Loadable
-     * @throws ReflectionException
-     * @throws RepeatedAttributeException
-     */
-    public function loadFromArray(array $array): self {
+	/**
+	 * @param array $array
+	 * @return CreateUserDto|Loadable
+	 * @throws ReflectionException
+	 * @throws RepeatedAttributeException
+	 */
+	public function loadFromArray(array $array): self
+	{
+		$props = (new ReflectionClass(static::class))->getProperties();
 
-        $props = (new \ReflectionClass(static::class))->getProperties();
+		foreach ($props as $prop) {
+			$attributes = $prop->getAttributes(Property::class);
 
-        foreach ($props as $prop) {
+			if (count($attributes) === 0) {
+				continue;
+			}
 
-            $attributes = $prop->getAttributes(Property::class);
+			if ($attributes[0]->isRepeated()) {
+				throw new RepeatedAttributeException(sprintf(
+					'attribute %s was repeated in property %s',
+					Property::class,
+					$prop->getName()
+				));
+			}
 
-            if (count($attributes) === 0) {
-                continue;
-            }
+			foreach ($attributes as $attribute) {
+				$property = $attribute->newInstance();
+				$indexName = $this->getName($prop, $property);
 
-            if ($attributes[0]->isRepeated()) {
-                throw new RepeatedAttributeException(sprintf('attribute %s was repeated in property %s', Property::class, $prop->getName()));
-            }
+				$value = $array[$indexName] ?? null;
 
-            foreach ($attributes as $attribute) {
-                $property = $attribute->newInstance();
-                $indexName = $this->getName($prop, $property);
+				$this->validate($prop, $value);
 
-                $value = $array[$indexName] ?? null;
+				$setter = $this->getSetter($prop, $property);
+				if (method_exists($this, $setter)) {
+					$this->$setter($value);
+				} else {
+					$prop->setValue($this, $value);
+				}
+			}
+		}
 
-                $this->validate($prop, $value);
-
-                $setter = $this->getSetter($prop, $property);
-                if (method_exists($this, $setter)) {
-                    $this->$setter($value);
-                } else {
-                    $prop->setValue($this, $value);
-                }
-            }
-        }
-
-        return $this;
-    }
-
+		return $this;
+	}
 }
