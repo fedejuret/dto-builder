@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e97de2926ca212b7cfc7a131b732bd9a",
+    "content-hash": "14d57d45e507414e6d59c7f85bca354a",
     "packages": [],
     "packages-dev": [
         {
@@ -99,6 +99,56 @@
                 }
             ],
             "time": "2024-12-11T14:50:44+00:00"
+        },
+        {
+            "name": "codelytv/coding-style",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CodelyTV/php-coding_style-codely.git",
+                "reference": "41d7e6b651619467b05018666606a1ef0958263e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CodelyTV/php-coding_style-codely/zipball/41d7e6b651619467b05018666606a1ef0958263e",
+                "reference": "41d7e6b651619467b05018666606a1ef0958263e",
+                "shasum": ""
+            },
+            "require": {
+                "symplify/easy-coding-standard": "^12.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodelyTv\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Codely",
+                    "homepage": "https://codely.com"
+                }
+            ],
+            "description": "PHP Coding Style rules we use in Codely",
+            "keywords": [
+                "Code style",
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/CodelyTV/php-coding_style-codely/issues",
+                "source": "https://github.com/CodelyTV/php-coding_style-codely/tree/1.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://bit.ly/CodelyTvPro",
+                    "type": "custom"
+                }
+            ],
+            "time": "2024-08-05T14:17:14+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -1726,6 +1776,70 @@
                 }
             ],
             "time": "2025-01-13T09:36:00+00:00"
+        },
+        {
+            "name": "projektgopher/whisky",
+            "version": "v0.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ProjektGopher/whisky.git",
+                "reference": "23c829cd471abfcc8f870038d3116e8d7cffb2d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ProjektGopher/whisky/zipball/23c829cd471abfcc8f870038d3116e8d7cffb2d5",
+                "reference": "23c829cd471abfcc8f870038d3116e8d7cffb2d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.9",
+                "laravel-zero/framework": "^10.1.2",
+                "laravel/pint": "^1.10",
+                "mockery/mockery": "^1.6.7",
+                "nunomaduro/termwind": "^1.15.1",
+                "pestphp/pest": "^2.9",
+                "pestphp/pest-plugin-type-coverage": "^2.0",
+                "swaggest/json-schema": "^0.12.41"
+            },
+            "bin": [
+                "builds/whisky"
+            ],
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "ProjektGopher\\Whisky\\": "app/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Len Woodward",
+                    "email": "Len@ProjektGopher.com"
+                }
+            ],
+            "description": "A simple CLI tool for managing a project's git hooks across multiple members.",
+            "homepage": "https://github.com/ProjektGopher/whisky",
+            "keywords": [
+                "ProjektGopher",
+                "cli",
+                "dev",
+                "git",
+                "hooks",
+                "laravel",
+                "php",
+                "whisky"
+            ],
+            "support": {
+                "issues": "https://github.com/ProjektGopher/whisky/issues",
+                "source": "https://github.com/ProjektGopher/whisky"
+            },
+            "time": "2025-02-25T20:04:13+00:00"
         },
         {
             "name": "psr/container",
@@ -3631,6 +3745,67 @@
                 }
             ],
             "time": "2024-11-13T13:31:26+00:00"
+        },
+        {
+            "name": "symplify/easy-coding-standard",
+            "version": "12.5.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/easy-coding-standard/easy-coding-standard.git",
+                "reference": "2bf0e468dc9679f3835c835cd3fd4a25ff6e4e14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/easy-coding-standard/easy-coding-standard/zipball/2bf0e468dc9679f3835c835cd3fd4a25ff6e4e14",
+                "reference": "2bf0e468dc9679f3835c835cd3fd4a25ff6e4e14",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "conflict": {
+                "friendsofphp/php-cs-fixer": "<3.46",
+                "phpcsstandards/php_codesniffer": "<3.8",
+                "symplify/coding-standard": "<12.1"
+            },
+            "suggest": {
+                "ext-dom": "Needed to support checkstyle output format in class CheckstyleOutputFormatter"
+            },
+            "bin": [
+                "bin/ecs"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Use Coding Standard with 0-knowledge of PHP-CS-Fixer and PHP_CodeSniffer",
+            "keywords": [
+                "Code style",
+                "automation",
+                "fixer",
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/easy-coding-standard/easy-coding-standard/issues",
+                "source": "https://github.com/easy-coding-standard/easy-coding-standard/tree/12.5.8"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rectorphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-01-31T13:59:38+00:00"
         },
         {
             "name": "ta-tikoma/phpunit-architecture-test",

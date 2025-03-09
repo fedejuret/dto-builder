@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fedejuret\DtoBuilder\Exceptions;
 
-class RepeatedAttributeException extends \Exception
-{
+use Exception;
 
-}
+final class RepeatedAttributeException extends Exception {}
