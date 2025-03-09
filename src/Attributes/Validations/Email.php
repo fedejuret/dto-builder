@@ -24,7 +24,7 @@ final class Email implements ValidationInterface
 	 */
 	public function validate(ReflectionProperty $property, mixed $value): void
 	{
-		if (gettype($value) !== 'string' && filter_var($value, FILTER_VALIDATE_EMAIL) === false) {
+		if (gettype($value) !== 'string' || filter_var($value, FILTER_VALIDATE_EMAIL) === false) {
 			if ($this->failMessage === null) {
 				$this->failMessage = sprintf('"%s" must be a valid email', $property->getName());
 			}
