@@ -33,7 +33,7 @@ class Length implements ValidationInterface
                     $this->failMessage = sprintf('Length for "%s" must between %s and %s', $property->getName(), $this->min, $this->max);
                 }
 
-                throw new ValidationException($this->failMessage);
+                throw new ValidationException($this->failMessage, $property->getName(), self::class);
 
             }
 

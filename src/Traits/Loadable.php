@@ -3,13 +3,19 @@
 namespace Fedejuret\DtoBuilder\Traits;
 
 use Fedejuret\DtoBuilder\Attributes\Property;
+use Fedejuret\DtoBuilder\CreateUserDto;
+use Fedejuret\DtoBuilder\Exceptions\RepeatedAttributeException;
+use ReflectionException;
 
 trait Loadable
 {
     use PropertyTrait, ValidationsTrait;
 
     /**
-     * @throws \ReflectionException
+     * @param array $array
+     * @return CreateUserDto|Loadable
+     * @throws ReflectionException
+     * @throws RepeatedAttributeException
      */
     public function loadFromArray(array $array): self {
 
@@ -24,8 +30,7 @@ trait Loadable
             }
 
             if ($attributes[0]->isRepeated()) {
-                //TODO: Change for custom exception
-                throw new \Exception('Tributes repeated');
+                throw new RepeatedAttributeException(sprintf('attribute %s was repeated in property %s', Property::class, $prop->getName()));
             }
 
             foreach ($attributes as $attribute) {

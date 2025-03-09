@@ -1,12 +1,10 @@
 <?php
 
-use Fedejuret\DtoBuilder\CreateUserDto;
-
 describe('1.0: Can create user Dto', function () {
 
     test('1.1: Create Dto Successfully', function () {
 
-        $dto = (new CreateUserDto())
+        $dto = getDtoClass()
             ->loadFromArray([
                 'first_name' => 'Federico',
                 'last_name' => 'Juretich',
@@ -15,7 +13,6 @@ describe('1.0: Can create user Dto', function () {
                 'email_sent' => false,
             ]);
 
-        expect($dto instanceof CreateUserDto);
         expect($dto->getFirstName())->toBe('Federico')
             ->and($dto->getLastName())->toBe('Juretich')
             ->and($dto->toArray())->toBe([
@@ -28,10 +25,17 @@ describe('1.0: Can create user Dto', function () {
     });
 
     test('1.2: must trow exception because lastname was required', function () {
-        (new CreateUserDto())
+        getDtoClass()
             ->loadFromArray([
                 'first_name' => 'Federico',
             ]);
     })->throws(\Fedejuret\DtoBuilder\Exceptions\ValidationException::class);
+
+    test('1.3: must trow exception because property was repeated', function () {
+        getDtoRepeatedPropertyAttributeClass()
+            ->loadFromArray([
+                'first_name' => 'Federico',
+            ]);
+    })->throws(\Fedejuret\DtoBuilder\Exceptions\RepeatedAttributeException::class);
 
 });

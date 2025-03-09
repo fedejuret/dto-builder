@@ -30,7 +30,7 @@ class Numeric implements ValidationInterface
                 $this->failMessage = sprintf('%s must be numeric', $property->getName());
             }
 
-            throw new ValidationException($this->failMessage);
+            throw new ValidationException($this->failMessage, $property->getName(), self::class);
         }
     }
 }

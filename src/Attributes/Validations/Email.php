@@ -30,7 +30,7 @@ class Email implements ValidationInterface
                 $this->failMessage = sprintf('"%s" must be a valid email', $property->getName());
             }
 
-            throw new ValidationException($this->failMessage);
+            throw new ValidationException($this->failMessage, $property->getName(), self::class);
         }
     }
 }

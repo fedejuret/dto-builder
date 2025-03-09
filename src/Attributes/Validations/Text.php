@@ -30,7 +30,7 @@ class Text implements ValidationInterface
                 $this->failMessage = sprintf('"%s" must be string', $property->getName());
             }
 
-            throw new ValidationException($this->failMessage);
+            throw new ValidationException($this->failMessage, $property->getName(), self::class);
         }
     }
 }

@@ -29,7 +29,7 @@ class Required implements ValidationInterface
                 $this->failMessage = sprintf('"%s" is required.', $property->getName());
             }
 
-            throw new ValidationException($this->failMessage);
+            throw new ValidationException($this->failMessage, $property->getName(), self::class);
         }
     }
 }
