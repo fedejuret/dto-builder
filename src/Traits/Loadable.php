@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Fedejuret\DtoBuilder\Traits;
 
 use Fedejuret\DtoBuilder\Attributes\Property;
-use Fedejuret\DtoBuilder\CreateUserDto;
 use Fedejuret\DtoBuilder\Exceptions\RepeatedAttributeException;
 use ReflectionClass;
 use ReflectionException;
@@ -16,7 +15,7 @@ trait Loadable
 
 	/**
 	 * @param array $array
-	 * @return CreateUserDto|Loadable
+	 * @return self
 	 * @throws ReflectionException
 	 * @throws RepeatedAttributeException
 	 */
