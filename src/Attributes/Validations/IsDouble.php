@@ -10,7 +10,7 @@ use Fedejuret\DtoBuilder\Interfaces\ValidationInterface;
 use ReflectionProperty;
 
 #[Attribute(Attribute::TARGET_PROPERTY)]
-final class Numeric implements ValidationInterface
+final class IsDouble implements ValidationInterface
 {
 	public function __construct(
 		private ?string $failMessage = null,
@@ -24,7 +24,7 @@ final class Numeric implements ValidationInterface
 	 */
 	public function validate(ReflectionProperty $property, mixed $value): void
 	{
-		if (!is_numeric($value)) {
+		if (gettype($value) !== 'double') {
 			if ($this->failMessage === null) {
 				$this->failMessage = sprintf('%s must be numeric', $property->getName());
 			}

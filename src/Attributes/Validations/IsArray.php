@@ -10,7 +10,7 @@ use Fedejuret\DtoBuilder\Interfaces\ValidationInterface;
 use ReflectionProperty;
 
 #[Attribute(Attribute::TARGET_PROPERTY)]
-final class Email implements ValidationInterface
+final class IsArray implements ValidationInterface
 {
 	public function __construct(
 		private ?string $failMessage = null,
@@ -19,14 +19,14 @@ final class Email implements ValidationInterface
 	/**
 	 * @param ReflectionProperty $property
 	 * @param mixed $value
-	 * @return void
 	 * @throws ValidationException
+	 * @return void
 	 */
 	public function validate(ReflectionProperty $property, mixed $value): void
 	{
-		if (gettype($value) !== 'string' || filter_var($value, FILTER_VALIDATE_EMAIL) === false) {
+		if (!is_array($value)) {
 			if ($this->failMessage === null) {
-				$this->failMessage = sprintf('"%s" must be a valid email', $property->getName());
+				$this->failMessage = sprintf('"%s" must be array', $property->getName());
 			}
 
 			throw new ValidationException($this->failMessage, $property->getName(), self::class);

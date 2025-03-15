@@ -46,17 +46,18 @@ Ahora, de esta manera, te ves obligado a llamar al método setFirstName y setLas
 **¿Qué tal si lo mejoramos un poco?**
 
 Sería algo asi cómo:
+
 ```php
 
 <?php
 
 use Fedejuret\DtoBuilder\Attributes\Property;
-use Fedejuret\DtoBuilder\Attributes\Validations\Boolean;
-use Fedejuret\DtoBuilder\Attributes\Validations\Date;
-use Fedejuret\DtoBuilder\Attributes\Validations\Email;
+use Fedejuret\DtoBuilder\Attributes\Validations\IsBoolean;
+use Fedejuret\DtoBuilder\Attributes\Validations\IsDate;
+use Fedejuret\DtoBuilder\Attributes\Validations\IsEmail;
 use Fedejuret\DtoBuilder\Attributes\Validations\Length;
 use Fedejuret\DtoBuilder\Attributes\Validations\Required;
-use Fedejuret\DtoBuilder\Attributes\Validations\Text;
+use Fedejuret\DtoBuilder\Attributes\Validations\IsString;
 use Fedejuret\DtoBuilder\Traits\Loadable;
 use Fedejuret\DtoBuilder\Traits\Arrayable;
 
@@ -69,22 +70,22 @@ class CreateUserDto
     private string $firstName;
 
     #[Property(name: 'last_name')]
-    #[Text]
+    #[IsString]
     #[Length(min: 8, max: 255)]
     private string $lastName;
 
     #[Property]
-    #[Date]
+    #[IsDate]
     private string $birthday;
 
     #[Property]
     #[Required]
-    #[Email]
+    #[IsEmail]
     private string $email;
 
     #[Property(name: 'email_sent')]
     #[Required]
-    #[Boolean]
+    #[IsBoolean]
     private bool $emailSent;
 
     public function getEmailSent(): bool
@@ -160,15 +161,18 @@ Este atributo sirve para configurar la propiedad del dto.
 ## Validaciones con atributos
 Antes de cargar el valor en la propiedad, puedes correr una serie de validaciones mediante atributos. Entre ellas estan:
 
-* #[Required]: Valida que la propiedad se envíe en el array
-* #[Text]: Valida que sea de tipo string
-* #[Length(min and max)]: Valida longitudes de una cadena de texto
-* #[Email]: Verifica que el email enviado tenga formato de email
-* #[Domain]: Valida que la cadena de texto enviada sea un dominio
-* #[IPAddress]: Verifica que la cadena de texto enviada sea una IP
-* #[Numeric]: Valida que el dato enviado sea un numero
-* #[Boolean]: Valida que el dato enviado sea un booleano
-* #[Date]: Verifica que el dato enviado sea una fecha valida.
+* #[Required]: Valida que la propiedad se envíe en el array.
+* #[IsString]: Valida que sea de tipo string.
+* #[Length(min and max)]: Valida longitudes de una cadena de texto.
+* #[IsEmail]: Verifica que el email enviado tenga formato de email.
+* #[IsDomain]: Valida que la cadena de texto enviada sea un dominio.
+* #[IsIPAddress]: Verifica que la cadena de texto enviada sea una IP.
+* #[IsNumeric]: Valida que el dato enviado sea un numero.
+* #[IsBoolean]: Valida que el dato enviado sea un booleano.
+* #[IsDate]: Verifica que el dato enviado sea una fecha valida.
+* #[IsArray]: Verifica que el dato enviado sea un array.
+* #[IsInteger]: Verifica que el dato enviado sea del tipo de dato int.
+* #[IsDouble]: Verifica que el dato enviado sea del tipo de dato double.
 
 ## Tests
 Cloná el repositorio:
