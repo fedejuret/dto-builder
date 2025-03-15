@@ -27,18 +27,14 @@ declare(strict_types=1);
 */
 
 use Fedejuret\DtoBuilder\Attributes\Property;
-use Fedejuret\DtoBuilder\Attributes\Validations\Boolean;
-use Fedejuret\DtoBuilder\Attributes\Validations\Date;
-use Fedejuret\DtoBuilder\Attributes\Validations\Email;
+use Fedejuret\DtoBuilder\Attributes\Validations\IsBoolean;
+use Fedejuret\DtoBuilder\Attributes\Validations\IsDate;
+use Fedejuret\DtoBuilder\Attributes\Validations\IsEmail;
+use Fedejuret\DtoBuilder\Attributes\Validations\IsString;
 use Fedejuret\DtoBuilder\Attributes\Validations\Length;
 use Fedejuret\DtoBuilder\Attributes\Validations\Required;
-use Fedejuret\DtoBuilder\Attributes\Validations\Text;
 use Fedejuret\DtoBuilder\Traits\Arrayable;
 use Fedejuret\DtoBuilder\Traits\Loadable;
-
-expect()->extend('toBeOne', function () {
-	return $this->toBe(1);
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -61,22 +57,22 @@ function getDtoClass(): object
 		private string $firstName;
 
 		#[Property(name: 'last_name')]
-		#[Text]
+		#[IsString]
 		#[Length(min: 8, max: 255)]
 		private string $lastName;
 
 		#[Property]
-		#[Date]
+		#[IsDate]
 		private string $birthday;
 
 		#[Property]
 		#[Required]
-		#[Email]
+		#[IsEmail]
 		private string $email;
 
 		#[Property(name: 'email_sent')]
 		#[Required]
-		#[Boolean]
+		#[IsBoolean]
 		private bool $emailSent;
 
 		public function getEmailSent(): bool
@@ -147,22 +143,22 @@ function getDtoRepeatedPropertyAttributeClass(): object
 		private string $firstName;
 
 		#[Property(name: 'last_name')]
-		#[Text]
+		#[IsString]
 		#[Length(min: 8, max: 255)]
 		private string $lastName;
 
 		#[Property]
-		#[Date]
+		#[IsDate]
 		private string $birthday;
 
 		#[Property]
 		#[Required]
-		#[Email]
+		#[IsEmail]
 		private string $email;
 
 		#[Property(name: 'email_sent')]
 		#[Required]
-		#[Boolean]
+		#[IsBoolean]
 		private bool $emailSent;
 
 		public function getEmailSent(): bool

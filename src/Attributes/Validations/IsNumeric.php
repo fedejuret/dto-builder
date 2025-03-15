@@ -10,7 +10,7 @@ use Fedejuret\DtoBuilder\Interfaces\ValidationInterface;
 use ReflectionProperty;
 
 #[Attribute(Attribute::TARGET_PROPERTY)]
-final class IPAddress implements ValidationInterface
+final class IsNumeric implements ValidationInterface
 {
 	public function __construct(
 		private ?string $failMessage = null,
@@ -24,9 +24,9 @@ final class IPAddress implements ValidationInterface
 	 */
 	public function validate(ReflectionProperty $property, mixed $value): void
 	{
-		if (filter_var($value, FILTER_VALIDATE_IP) === false) {
+		if (!is_numeric($value)) {
 			if ($this->failMessage === null) {
-				$this->failMessage = sprintf('"%s" must be a valid ip address', $property->getName());
+				$this->failMessage = sprintf('%s must be numeric', $property->getName());
 			}
 
 			throw new ValidationException($this->failMessage, $property->getName(), self::class);
