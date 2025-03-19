@@ -10,6 +10,8 @@ use ReflectionClass;
 
 trait Arrayable
 {
+	use PropertyTrait;
+
 	/**
 	 * @return array
 	 * @throws RepeatedAttributeException
@@ -36,7 +38,7 @@ trait Arrayable
 
 			foreach ($attributes as $attribute) {
 				$property = $attribute->newInstance();
-				$indexName = $this->getName($prop, $property);
+				$indexName = $this->getPropertyName($prop, $property);
 
 				$getter = $this->getGetter($prop, $property);
 

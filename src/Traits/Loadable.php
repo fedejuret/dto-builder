@@ -40,7 +40,7 @@ trait Loadable
 
 			foreach ($attributes as $attribute) {
 				$property = $attribute->newInstance();
-				$indexName = $this->getName($prop, $property);
+				$indexName = $this->getPropertyName($prop, $property);
 
 				$value = $array[$indexName] ?? null;
 
