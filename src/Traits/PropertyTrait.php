@@ -14,7 +14,7 @@ trait PropertyTrait
 	 * @param Property $property
 	 * @return string
 	 */
-	protected function getName(ReflectionProperty $classProperty, Property $property): string
+	protected function getPropertyName(ReflectionProperty $classProperty, Property $property): string
 	{
 		if ($property->getName() !== null) {
 			return $property->getName();
