@@ -27,13 +27,15 @@ final class Length implements ValidationInterface
 	public function validate(ReflectionProperty $property, mixed $value): void
 	{
 		if (gettype($value) === 'string') {
-			if (strlen($value) < $this->min || strlen($value) > $this->max) {
+			$len = strlen($value);
+			if ($len < $this->min || $len > $this->max) {
 				if ($this->failMessage === null) {
 					$this->failMessage = sprintf(
-						'Length for "%s" must between %s and %s',
+						'Length for "%s" must between %s and %s. Given %s',
 						$property->getName(),
 						$this->min,
-						$this->max
+						$this->max,
+						$len
 					);
 				}
 

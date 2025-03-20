@@ -10,8 +10,8 @@ use Fedejuret\DtoBuilder\Attributes\Validations\Required;
 use Fedejuret\DtoBuilder\Exceptions\ValidationException;
 use Fedejuret\DtoBuilder\Traits\Loadable;
 
-describe('1.0 test that library can validate primitives types.', function () {
-	test('1.0.0 test that library can validate strings', function () {
+describe('1.1 test that library can validate primitives types.', function () {
+	test('1.1.0 test that library can validate strings', function () {
 		$class = new class() {
 			use Loadable;
 
@@ -43,7 +43,7 @@ describe('1.0 test that library can validate primitives types.', function () {
 		]);
 	})->throws(ValidationException::class);
 
-	test('1.0.1 test that library can validate booleans', function () {
+	test('1.1.1 test that library can validate booleans', function () {
 		$class = new class() {
 			use Loadable;
 
@@ -75,7 +75,7 @@ describe('1.0 test that library can validate primitives types.', function () {
 		]);
 	})->throws(ValidationException::class);
 
-	test('1.0.2 test that library can validate integers', function () {
+	test('1.1.2 test that library can validate integers', function () {
 		$class = new class() {
 			use Loadable;
 
@@ -107,7 +107,7 @@ describe('1.0 test that library can validate primitives types.', function () {
 		]);
 	})->throws(ValidationException::class);
 
-	test('1.0.3 test that library can validate arrays', function () {
+	test('1.1.3 test that library can validate arrays', function () {
 		$class = new class() {
 			use Loadable;
 
@@ -142,7 +142,7 @@ describe('1.0 test that library can validate primitives types.', function () {
 		]);
 	})->throws(ValidationException::class);
 
-	test('1.0.4 test that library can validate date', function () {
+	test('1.1.4 test that library can validate date', function () {
 		$class = new class() {
 			use Loadable;
 
@@ -175,7 +175,7 @@ describe('1.0 test that library can validate primitives types.', function () {
 	})->throws(ValidationException::class);
 
 
-	test('1.0.5 test that library can validate double', function () {
+	test('1.1.5 test that library can validate double', function () {
 		$class = new class() {
 			use Loadable;
 
