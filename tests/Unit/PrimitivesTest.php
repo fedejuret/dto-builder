@@ -107,7 +107,33 @@ describe('1.1 test that library can validate primitives types.', function () {
 		]);
 	})->throws(ValidationException::class);
 
-	test('1.1.3 test that library can validate arrays', function () {
+	test('1.1.3 test that library can validate integers with mins and max', function () {
+		$class = new class() {
+			use Loadable;
+
+			#[Property]
+			#[Required]
+			#[IsInteger(min: 10, max: 20)]
+			private int $age;
+
+			public function getAge(): int
+			{
+				return $this->age;
+			}
+
+			public function setAge(int $age): self
+			{
+				$this->age = $age;
+				return $this;
+			}
+		};
+
+		$class->loadFromArray([
+			'age' => 23,
+		]);
+	})->throws(ValidationException::class);
+
+	test('1.1.4 test that library can validate arrays', function () {
 		$class = new class() {
 			use Loadable;
 
@@ -142,7 +168,7 @@ describe('1.1 test that library can validate primitives types.', function () {
 		]);
 	})->throws(ValidationException::class);
 
-	test('1.1.4 test that library can validate date', function () {
+	test('1.1.5 test that library can validate date', function () {
 		$class = new class() {
 			use Loadable;
 
@@ -175,7 +201,7 @@ describe('1.1 test that library can validate primitives types.', function () {
 	})->throws(ValidationException::class);
 
 
-	test('1.1.5 test that library can validate double', function () {
+	test('1.1.6 test that library can validate double', function () {
 		$class = new class() {
 			use Loadable;
 

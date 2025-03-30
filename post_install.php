@@ -13,7 +13,7 @@ $template = <<<JSON
   }
 }
 JSON;
-
+    
 $filename = __DIR__ . '/whisky.json';
 
 if (!file_exists($filename)) {
