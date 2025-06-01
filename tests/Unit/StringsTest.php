@@ -94,7 +94,7 @@ describe('1.2 test strings validations', function () {
 
 		expect($dto->code)->toBe('some_valid_code');
 
-		$dtoFail = $class->loadFromArray([
+		$class->loadFromArray([
 			'code' => 'some_-invalid-123-valid_code',
 		]);
 	})->throws(Fedejuret\DtoBuilder\Exceptions\ValidationException::class);
