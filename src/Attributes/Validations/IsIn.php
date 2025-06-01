@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Fedejuret\DtoBuilder\Attributes\Validations;
 
 use Attribute;
+use Enum;
 use Fedejuret\DtoBuilder\Exceptions\ValidationException;
 use Fedejuret\DtoBuilder\Interfaces\ValidationInterface;
 use ReflectionProperty;
@@ -13,7 +14,7 @@ use ReflectionProperty;
 final class IsIn implements ValidationInterface
 {
 	public function __construct(
-		private readonly array|\Enum $availableValues,
+		private readonly array | Enum $availableValues,
 		private readonly bool $strict = false,
 		private ?string $failMessage = null,
 	) {}
