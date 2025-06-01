@@ -1,15 +1,35 @@
 # DTO Builder
 
-DTO Builder es una librería de php que permite la instanciación de los valores de los DTOs de forma dinámica mediante la característica de atributos introducida en PHP +8.0.
+&#x20; &#x20;
 
-## ¿Como usar?
+**DTO Builder** is a lightweight PHP library that streamlines the process of creating and populating Data Transfer Objects (DTOs) using PHP 8+ attributes. It enables dynamic property hydration, automatic validation, and conversion to arrays with minimal boilerplate.
 
-Instala la librería usando:
+---
+
+## ✨ Features
+
+* 📦 Instantiate DTOs from arrays
+* 🧪 Attribute-based property validation
+* 🖁️ Convert DTOs to arrays effortlessly
+* ✅ PHP 8 attributes for configuration
+* 🧹 Extendable and easy to integrate
+
+---
+
+## 📦 Installation
+
+Install the package via Composer:
+
 ```bash
 composer require fedejuret/dto-builder
 ```
 
-Luego, crea tu DTO de forma normal. Ejemplo:
+---
+
+## 🚀 Getting Started
+
+### 1. Define Your DTO
+
 ```php
 <?php
 
@@ -18,22 +38,14 @@ class CreateUserDto
     private string $firstName;
     private string $lastName;
 
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-
+    public function getFirstName(): string { return $this->firstName; }
     public function setFirstName(string $firstName): CreateUserDto
     {
         $this->firstName = $firstName;
         return $this;
     }
 
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
+    public function getLastName(): string { return $this->lastName; }
     public function setLastName(string $lastName): CreateUserDto
     {
         $this->lastName = $lastName;
@@ -42,13 +54,13 @@ class CreateUserDto
 }
 ```
 
-Ahora, de esta manera, te ves obligado a llamar al método setFirstName y setLastName para setear los valores.
-**¿Qué tal si lo mejoramos un poco?**
+This requires calling setters manually for each property. **With DTO Builder**, you can simplify this dramatically.
 
-Sería algo asi cómo:
+---
+
+### 2. Use Attributes for Property Mapping and Validation
 
 ```php
-
 <?php
 
 use Fedejuret\DtoBuilder\Attributes\Property;
@@ -88,99 +100,95 @@ class CreateUserDto
     #[IsBoolean]
     private bool $emailSent;
 
-    public function getEmailSent(): bool
-    {
-        return $this->emailSent;
-    }
-
-    public function setEmailSent(bool $emailSent): CreateUserDto
-    {
-        $this->emailSent = $emailSent;
-        return $this;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): CreateUserDto
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    public function getBirthday(): string
-    {
-        return $this->birthday;
-    }
-
-    public function setBirthday(string $birthday): CreateUserDto
-    {
-        $this->birthday = $birthday;
-        return $this;
-    }
-
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-
-    public function setFirstName(string $firstName): CreateUserDto
-    {
-        $this->firstName = $firstName;
-        return $this;
-    }
-
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $lastName): CreateUserDto
-    {
-        $this->lastName = $lastName;
-        return $this;
-    }
+    // Getters and Setters...
 }
-
 ```
 
-## Arrayable
-Este trait habilita el método `toArray()` en el DTO. Básicamente, convierte el dto en un array "clave" "valor".
+---
 
-## Loadable
-Este trait es quien habilita el método `loadFromArray($array)` en el dto. En este caso, deberías pasarle el array completo matcheando el nombre de las propiedades para que así se les de un valor mediante los setters.
+## 🧰 Traits
 
-## Property Attribute #[Property]
-Este atributo sirve para configurar la propiedad del dto.
-* name: setea el nombre con el que la propiedad será devuelta en el método toArray y tambien cómo será buscadá dentro del array en el método loadFromArray.
-* setter: especifica el nombre del método setter que se quiere usar.
-* getter: especifica el nombre del getter que se quiere usar.
+### `Loadable`
 
-## Validaciones con atributos
-Antes de cargar el valor en la propiedad, puedes correr una serie de validaciones mediante atributos. Entre ellas estan:
+Enables the `loadFromArray(array $data): self` method, which automatically maps input arrays to DTO properties based on defined attributes.
 
-* #[Required]: Valida que la propiedad se envíe en el array.
-* #[IsString]: Valida que sea de tipo string.
-* #[Length(min and max)]: Valida longitudes de una cadena de texto.
-* #[IsEmail]: Verifica que el email enviado tenga formato de email.
-* #[IsDomain]: Valida que la cadena de texto enviada sea un dominio.
-* #[IsIPAddress]: Verifica que la cadena de texto enviada sea una IP.
-* #[IsNumeric]: Valida que el dato enviado sea un numero.
-* #[IsBoolean]: Valida que el dato enviado sea un booleano.
-* #[IsDate]: Verifica que el dato enviado sea una fecha valida.
-* #[IsArray]: Verifica que el dato enviado sea un array.
-* #[IsInteger]: Verifica que el dato enviado sea del tipo de dato int.
-* #[IsDouble]: Verifica que el dato enviado sea del tipo de dato double.
+### `Arrayable`
 
-## Tests
-Cloná el repositorio:
+Adds a `toArray(): array` method, which serializes the DTO to a key-value array using the attribute-defined property names.
+
+---
+
+## 🏷️ Attributes
+
+### `#[Property]`
+
+Defines mapping behavior for each DTO property.
+
+| Attribute | Description                                                   |
+| --------- | ------------------------------------------------------------- |
+| `name`    | Overrides the array key name for hydration and serialization. |
+| `setter`  | Specifies a custom setter method.                             |
+| `getter`  | Specifies a custom getter method.                             |
+
+---
+
+## ✅ Built-in Validations
+
+Use validation attributes to ensure the integrity of your DTO before hydration.
+
+| Attribute                   | Description                                |
+|-----------------------------|--------------------------------------------|
+| `#[Required]`               | Ensures the value is present in the input. |
+| `#[IsString]`               | Must be of type `string`.                  |
+| `#[IsEmail]`                | Must be a valid email address.             |
+| `#[IsDate]`                 | Must be a valid date string.               |
+| `#[IsBoolean]`              | Must be a boolean (`true`/`false`).        |
+| `#[IsNumeric]`              | Must be numeric.                           |
+| `#[IsInteger]`              | Must be an integer.                        |
+| `#[IsDouble]`               | Must be a double/float.                    |
+| `#[IsArray]`                | Must be an array.                          |
+| `#[IsDomain]`               | Must be a valid domain name.               |
+| `#[IsIPAddress]`            | Must be a valid IP address.                |
+| `#[Length(min, max)]`       | Validates the string length.               |
+| `#[IsIn(availableValues)]`  | Validates if value is in array.            |
+| `#[IsRegex(pattern)]`       | Validates if values match with regex.      |
+| `#[IsUuid]`                 | Validates if values is a valid UUID.       |
+
+---
+
+## 🥪 Running Tests
+
+Clone the repository and install dependencies:
+
 ```bash
-composer install && composer run test
+composer install
+composer run test
 ```
 
-## Contacto
-Email: fedejuret@gmail.com<br>
-Website: https://federicojuretich.com<br>
-LinkedIn: https://www.linkedin.com/in/federicojuretich/
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! To get started:
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
+
+Please follow the [PSR-12 coding standard](https://www.php-fig.org/psr/psr-12/) when contributing.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+
+---
+
+## 📢 Contact
+
+* Email: [fedejuret@gmail.com](mailto:fedejuret@gmail.com)
+* Website: [federicojuretich.com](https://federicojuretich.com)
+* LinkedIn: [@federicojuretich](https://www.linkedin.com/in/federicojuretich/)

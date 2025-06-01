@@ -28,6 +28,7 @@
     "scripts": {
         "test": "./vendor/bin/pest",
         "ecs:check": "./vendor/bin/ecs check",
+        "ecs:fix": "./vendor/bin/ecs check --fix",
         "post-install-cmd": [
             "php post_install.php"
         ]
