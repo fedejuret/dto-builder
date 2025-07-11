@@ -38,11 +38,11 @@ trait Loadable
 				));
 			}
 
-            $defaultValue = null;
+			$defaultValue = null;
 
-            if ($prop->hasDefaultValue()) {
-                $defaultValue = $prop->getDefaultValue();
-            }
+			if ($prop->hasDefaultValue()) {
+				$defaultValue = $prop->getDefaultValue();
+			}
 
 			foreach ($attributes as $attribute) {
 				$property = $attribute->newInstance();

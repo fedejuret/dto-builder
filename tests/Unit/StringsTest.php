@@ -10,14 +10,14 @@ describe('1.2 test strings validations', function () {
 			use Loadable;
 
 			#[Fedejuret\DtoBuilder\Attributes\Property]
-            #[Fedejuret\DtoBuilder\Attributes\Validations\Required]
+			#[Fedejuret\DtoBuilder\Attributes\Validations\Required]
 			#[Fedejuret\DtoBuilder\Attributes\Validations\Length(min: 8, max: 40)]
 			public string $description;
 		};
 
 		$instance = $class->loadFromArray([
-            'description' => 'some text rather than 8 characters',
-        ]);
+			'description' => 'some text rather than 8 characters',
+		]);
 
 		expect($instance->description)->toBe('some text rather than 8 characters');
 	});
