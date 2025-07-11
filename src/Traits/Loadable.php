@@ -38,11 +38,17 @@ trait Loadable
 				));
 			}
 
+            $defaultValue = null;
+
+            if ($prop->hasDefaultValue()) {
+                $defaultValue = $prop->getDefaultValue();
+            }
+
 			foreach ($attributes as $attribute) {
 				$property = $attribute->newInstance();
 				$indexName = $this->getPropertyName($prop, $property);
 
-				$value = $array[$indexName] ?? null;
+				$value = $array[$indexName] ?? $defaultValue;
 
 				$this->validate($prop, $value);
 

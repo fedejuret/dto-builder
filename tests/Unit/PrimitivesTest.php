@@ -232,4 +232,20 @@ describe('1.1 test that library can validate primitives types.', function () {
 			'birthday' => 'some',
 		]);
 	})->throws(ValidationException::class);
+
+
+    test('1.1.7 test that library can set defaults values', function () {
+        $class = new class() {
+            use Loadable;
+
+            #[Fedejuret\DtoBuilder\Attributes\Property]
+            #[Fedejuret\DtoBuilder\Attributes\Validations\Required]
+            #[Fedejuret\DtoBuilder\Attributes\Validations\IsBoolean]
+            public bool $active = false;
+        };
+
+        $dto = $class->loadFromArray([]);
+
+        expect($dto->active)->toBeFalse();
+    });
 });
