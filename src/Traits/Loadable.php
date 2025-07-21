@@ -11,7 +11,7 @@ use ReflectionException;
 
 trait Loadable
 {
-	use PropertyTrait, ValidationsTrait;
+	use PropertyTrait, ValidationsTrait, SanitizeTrait;
 
 	/**
 	 * @param array $array
@@ -49,6 +49,8 @@ trait Loadable
 				$indexName = $this->getPropertyName($prop, $property);
 
 				$value = $array[$indexName] ?? $defaultValue;
+
+				$this->sanitize($prop, $value);
 
 				$this->validate($prop, $value);
 
