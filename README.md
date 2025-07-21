@@ -1,7 +1,5 @@
 # DTO Builder
 
-&#x20; &#x20;
-
 **DTO Builder** is a lightweight PHP library that streamlines the process of creating and populating Data Transfer Objects (DTOs) using PHP 8+ attributes. It enables dynamic property hydration, automatic validation, and conversion to arrays with minimal boilerplate.
 
 ---
@@ -153,6 +151,73 @@ Use validation attributes to ensure the integrity of your DTO before hydration.
 | `#[IsIn(availableValues)]`  | Validates if value is in array.            |
 | `#[IsRegex(pattern)]`       | Validates if values match with regex.      |
 | `#[IsUuid]`                 | Validates if values is a valid UUID.       |
+
+---
+
+## 🧼 Built-in Sanitizations
+
+DTO Builder allows you to sanitize each property before validation and usage.
+
+### `#[HtmlSanitization]`
+
+Removes all HTML tags from a string, while optionally keeping specific safe tags.
+
+```php
+#[HtmlSanitization('<b><i><ul><li>')]
+public string $comment;
+```
+
+- Uses `strip_tags()` internally.
+- Useful for allowing basic formatting while stripping harmful tags like `<script>`.
+
+### `#[SecureSanitization]`
+
+A defensive sanitization designed to help mitigate OWASP Top 10 vulnerabilities like XSS.
+
+```php
+#[SecureSanitization]
+public string $bio;
+```
+
+- Removes all tags unless specific ones are whitelisted.
+- Escapes special characters (`<`, `>`, `'`, `"`, `&`) using `htmlspecialchars`.
+- Removes invisible characters and normalizes whitespace.
+- Optional parameter lets you keep specific HTML tags:
+
+```php
+#[SecureSanitization('<b><i>')]
+public string $safeContent;
+```
+
+---
+
+## 🛠️ Custom Sanitizations
+
+You can create your own sanitizers by implementing the `SanitizationInterface` and marking them as attributes.
+
+```php
+use Fedejuret\DtoBuilder\Interfaces\SanitizationInterface;
+
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
+class TrimSanitization implements SanitizationInterface
+{
+    public function sanitize(mixed &$value): void
+    {
+        if (is_string($value)) {
+            $value = trim($value);
+        }
+    }
+}
+```
+
+Usage:
+
+```php
+#[TrimSanitization]
+public string $username;
+```
+
+Custom sanitizations allow you to apply reusable transformations to your data before validation or further processing.
 
 ---
 
